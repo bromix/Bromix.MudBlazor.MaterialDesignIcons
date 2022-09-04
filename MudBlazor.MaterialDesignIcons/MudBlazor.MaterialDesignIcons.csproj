@@ -1,19 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Title>MudBlazor.MaterialDesignIcons</Title>
-    <Copyright>bromix</Copyright>
-    <PackageProjectUrl>https://github.com/bromix/MudBlazor.MaterialDesignIcons</PackageProjectUrl>
-    <PackageLicenseUrl>MIT</PackageLicenseUrl>
-    <PackageIcon>nuget.png</PackageIcon>
-    <RepositoryUrl>https://github.com/bromix/MudBlazor.MaterialDesignIcons</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="nuget.png" Pack="true" PackagePath=""/>
-  </ItemGroup>
+    <PropertyGroup>
+        <Title>MudBlazor.MaterialDesignIcons</Title>
+        <Copyright>bromix</Copyright>
+        <PackageProjectUrl>https://github.com/bromix/MudBlazor.MaterialDesignIcons</PackageProjectUrl>
+        <PackageLicenseUrl>MIT</PackageLicenseUrl>
+        <PackageIcon>nuget.png</PackageIcon>
+        <RepositoryUrl>https://github.com/bromix/MudBlazor.MaterialDesignIcons</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="nuget.png" Pack="true" PackagePath=""/>
+    </ItemGroup>
 </Project>
