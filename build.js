@@ -82,15 +82,3 @@ const outlineIcons = meta
     return item;
   });
 writeSvgCategory(outlineIcons, "Outline");
-
-exec(`dotnet build -c release /p:Version=${package.version}`, (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
-        return;
-    }
-    if (stderr) {
-        console.log(`stderr: ${stderr}`);
-        return;
-    }
-    console.log(`stdout: ${stdout}`);
-});

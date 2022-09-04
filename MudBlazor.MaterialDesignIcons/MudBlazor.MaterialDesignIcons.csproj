@@ -13,4 +13,7 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="nuget.png" Pack="true" PackagePath=""/>
+  </ItemGroup>
 </Project>
