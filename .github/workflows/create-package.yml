@@ -14,9 +14,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 14.X
       - run: npm install
+      - name: Extract SVG-Data
       - run: npm run build
+      - name: Setup dotnet
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.x.x
+      - name: Build Project
+        run: dotnet build -c release MudBlazor.MaterialDesignIcons
+      - name: Create Package
+        run: dotnet pack -c release MudBlazor.MaterialDesignIcons
