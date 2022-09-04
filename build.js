@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { exec } = require("child_process");
 
 /**
  * Helper function to parse the given json file.
@@ -19,16 +20,28 @@ const loadJsonFile = (fileName) => {
  */
 const SnakeCaseToCamelCase = (str) => str.toLowerCase().replace(/((^|[-_])[a-z0-9])/g, (group) => group.toUpperCase().replace("-", "").replace("_", ""));
 
-const addSvg = (output, metaItem, indent = "\t") => {
-  output.push(`${indent}/// <summary>`);
-  output.push(`${indent}/// <b>Codepoint: </b>${metaItem.codepoint}<br/>`);
-  output.push(`${indent}/// <b>Author: </b>${metaItem.author}<br/>`);
-  output.push(`${indent}/// </summary>`);
-  output.push(`${indent}public const string ${metaItem.iconName} = @"data";`);
-  output.push("");
+const writeSvg = (output, metaItem, indent = "\t") => {
+  const regexSvgPath = /<path(.*?)\/\>/g;
+  const regexReplaceQuotes = /\"/g;
+  const svgFileName = path.join("node_modules", "@mdi", "svg", "svg", metaItem.fileName);
+  const svgData = fs.readFileSync(svgFileName, "utf-8");
+  if ((m = regexSvgPath.exec(svgData)) !== null) {
+    const pathData = m[0].replace(regexReplaceQuotes, '""');
+
+    output.push(`${indent}/// <summary>`);
+    output.push(`${indent}/// <b>Codepoint: </b>${metaItem.codepoint}<br/>`);
+    output.push(`${indent}/// <b>Name: </b>mdi-${metaItem.name}<br/>`);
+    output.push(`${indent}/// <b>Author: </b>${metaItem.author}<br/>`);
+    output.push(`${indent}/// </summary>`);
+    output.push(`${indent}public const string ${metaItem.iconName} = @"${pathData}";`);
+    output.push("");
+  } else {
+    console.error(`Could not extract svg path from "${svgFileName}"`);
+  }
 };
 
 const writeSvgCategory = (metaItems, category) => {
+  console.info(`Writing ${metaItems.length} ${category} icons...`);
   const output = [];
   output.push("namespace MudBlazor.MaterialDesignIcons;");
   output.push("");
@@ -36,9 +49,9 @@ const writeSvgCategory = (metaItems, category) => {
   output.push("{");
   output.push(`\tpublic static class ${category}`);
   output.push("\t\t{");
-  metaItems.forEach((metaItem) => {
-    addSvg(output, metaItem, "\t\t");
-  });
+  for (var metaItem of metaItems) {
+    writeSvg(output, metaItem, "\t\t");
+  }
   output.push("\t\t}");
   output.push("}");
   const sourceFileName = path.join(`MudBlazor.MaterialDesignIcons/MaterialDesignIcons.${category}.cs`);
@@ -47,11 +60,10 @@ const writeSvgCategory = (metaItems, category) => {
 
 const packageFileName = path.join("node_modules", "@mdi", "svg", "package.json");
 const package = loadJsonFile(packageFileName);
-console.log(package.version);
+console.info(`Material Design Icon v${package.version}`);
 
 const metaFileName = path.join("node_modules", "@mdi", "svg", "meta.json");
 const meta = loadJsonFile(metaFileName);
-console.log(meta);
 
 const normalIcons = meta
   .filter((item) => !item.name.endsWith("-outline"))
@@ -70,3 +82,15 @@ const outlineIcons = meta
     return item;
   });
 writeSvgCategory(outlineIcons, "Outline");
+
+exec(`dotnet build -c release /p:Version=${package.version}`, (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
