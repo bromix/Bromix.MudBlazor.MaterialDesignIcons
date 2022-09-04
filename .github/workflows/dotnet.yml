@@ -29,9 +29,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build -c release
+        run: dotnet build -c release -p:Version=1.0.0-alpha
       - name: Test
-        run: dotnet pack -c release
+        run: dotnet pack -c release -p:Version=1.0.0-alpha
       - name: Provide download
         uses: actions/upload-artifact@v3
         with:
