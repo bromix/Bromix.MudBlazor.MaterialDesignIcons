@@ -4,10 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v3
-          - name: Setup node
-            uses: actions/setup-node@v3
-            with:
-              node-version: 14
-          - run: npm install
-          - run: npm build
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - run: npm install
+      - name: Build SVGs
+      - run: npm build
