@@ -25,6 +25,10 @@ Add the following using statement in `_Imports.razor`.
 <MudIcon Icon="@MaterialDesignIcons.Outline.Egg" Color="Color.Default" />
 ```
 
+## How does the package creation work?
+
+Using npm and the @mdi/svg module, the latest icons are downloaded as SVG. The meta.json is read in so that we have the names of the SVG files and the authors. The authors are mentioned for each icon in the comments (documentation). For each icon variant we create a separate partial class (e.g. MaterialDesignIcons.Normal.cs and MaterialDesignIcons.Outline.cs). Together a nuget packet is created.
+
 ## Related Packages
 
 [NPM @MDI Organization](https://npmjs.com/org/mdi)

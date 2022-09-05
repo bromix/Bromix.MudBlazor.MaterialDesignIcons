@@ -45,8 +45,10 @@ const writeSvgCategory = (metaItems, category) => {
   const output = [];
   output.push("namespace MudBlazor.MaterialDesignIcons;");
   output.push("");
+  output.push("/// Collection of Material Design Icons");
   output.push("public static partial class MaterialDesignIcons");
   output.push("{");
+  output.push(`\t/// ${category} variant of Material Design Icons`);
   output.push(`\tpublic static class ${category}`);
   output.push("\t\t{");
   for (var metaItem of metaItems) {
