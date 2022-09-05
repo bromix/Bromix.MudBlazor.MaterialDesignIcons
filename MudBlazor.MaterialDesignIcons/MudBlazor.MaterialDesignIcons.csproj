@@ -5,16 +5,18 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <PropertyGroup>
         <Title>MudBlazor.MaterialDesignIcons</Title>
+        <Description>Material Design Icons for MudBlazor</Description>
         <Copyright>Copyright bromix</Copyright>
         <Authors>bromix</Authors>
         <PackageProjectUrl>https://github.com/bromix/MudBlazor.MaterialDesignIcons</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageTags>Blazor, MudBlazor, Material, Material Design, Icons</PackageTags>
+        <PackageTags>Blazor;MudBlazor;Material;Material Design;Material Design Icons</PackageTags>
         <PackageIcon>nuget.png</PackageIcon>
         <RepositoryUrl>https://github.com/bromix/MudBlazor.MaterialDesignIcons</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
@@ -22,7 +24,7 @@
 
     <ItemGroup>
         <None Include="nuget.png" Pack="true" PackagePath="/" />
-        <None Include="../README.md" Pack="true" PackagePath="/"/>
-        <None Include="../LICENSE" Pack="true" PackagePath="/"/>
+        <None Include="../README.md" Pack="true" PackagePath="/" />
+        <None Include="../LICENSE" Pack="true" PackagePath="/" />
     </ItemGroup>
 </Project>

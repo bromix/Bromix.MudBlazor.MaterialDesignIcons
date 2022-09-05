@@ -1,4 +1,4 @@
-> _Note:_ Please use the main [MaterialDesign](https://github.com/Templarian/MaterialDesign/issues) repo to report issues. This repository is only for the creation of the nuget package.
+> _Note:_ Please use the main [MaterialDesign](https://github.com/Templarian/MaterialDesign/issues) repo to report issues. This repository is only for the creation and deployment of the package.
 
 # MaterialDesignIcons for [MudBlazor](https://github.com/Garderoben/MudBlazor)
 
