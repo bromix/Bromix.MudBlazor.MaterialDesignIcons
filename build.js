@@ -72,7 +72,7 @@ const normalIcons = meta
     item.iconName = SnakeCaseToCamelCase(item.name);
     return item;
   });
-writeSvgCategory(normalIcons, "Default");
+writeSvgCategory(normalIcons, "Normal");
 
 const outlineIcons = meta
   .filter((item) => item.name.endsWith("-outline"))
