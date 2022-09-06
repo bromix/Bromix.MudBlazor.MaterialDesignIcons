@@ -43,7 +43,7 @@ const writeSvg = (output, metaItem, indent = "\t") => {
 const writeSvgCategory = (metaItems, category) => {
   console.info(`Writing ${metaItems.length} ${category} icons...`);
   const output = [];
-  output.push("namespace MudBlazor.MaterialDesignIcons;");
+  output.push("namespace Bromix.MudBlazor.MaterialDesignIcons;");
   output.push("");
   output.push("/// Collection of Material Design Icons");
   output.push("public static partial class MaterialDesignIcons");
@@ -56,7 +56,7 @@ const writeSvgCategory = (metaItems, category) => {
   }
   output.push("\t\t}");
   output.push("}");
-  const sourceFileName = path.join(`MudBlazor.MaterialDesignIcons/MaterialDesignIcons.${category}.cs`);
+  const sourceFileName = path.join(`Bromix.MudBlazor.MaterialDesignIcons/MaterialDesignIcons.${category}.cs`);
   fs.writeFileSync(sourceFileName, output.join("\n"));
 };
 
