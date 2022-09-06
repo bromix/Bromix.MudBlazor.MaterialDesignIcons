@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Title>MudBlazor.MaterialDesignIcons</Title>
+        <Title>Bromix.MudBlazor.MaterialDesignIcons</Title>
         <Description>Material Design Icons for MudBlazor</Description>
         <Copyright>Copyright bromix</Copyright>
         <Authors>bromix</Authors>
