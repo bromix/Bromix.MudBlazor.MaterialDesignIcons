@@ -23,6 +23,10 @@ jobs:
           node-version: 14.x
       - name: Install @mdi/svg
         run: npm install
+      - name: Get Package Version
+        run: |
+          VERSION=$(node -p "require('./node_modules/@mdi/svg/package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Extract svg data
         run: npm run build
       - name: Setup .NET
@@ -32,9 +36,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build -c release -p:Version=1.0.0${{ env.VersionAppendix }}
+        run: dotnet build -c release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
       - name: Test
-        run: dotnet pack -c release -p:Version=1.0.0${{ env.VersionAppendix }}
+        run: dotnet pack -c release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
       - name: Provide download
         uses: actions/upload-artifact@v3
         with:
