@@ -20,6 +20,12 @@ Add the following using statement in `_Imports.razor`.
 @using Bromix.MudBlazor.MaterialDesignIcons
 ```
 
+If your're using a `GlobalUsings.cs`, you can also add:
+
+```c#
+using Bromix.MudBlazor.MaterialDesignIcons;
+```
+
 ## Usage
 
 ```razor
@@ -46,5 +52,6 @@ MaterialDesignIcons.Outline.cs).
 
 ## Learn More
 
+- [MudBlazor](https://github.com/Garderoben/MudBlazor)
 - [MaterialDesignIcons.com](https://materialdesignicons.com)
 - https://github.com/Templarian/MaterialDesign
