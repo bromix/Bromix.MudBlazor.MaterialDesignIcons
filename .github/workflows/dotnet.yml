@@ -37,8 +37,10 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
-      - name: Test
+      - name: Pack
         run: dotnet pack -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
+      - name: Push to nuget
+        run: dotnet nuget push "**/*.nupkg" -k ${{ secrets.NUGET_API_KEY }}
       - name: Provide download
         uses: actions/upload-artifact@v3
         with:
