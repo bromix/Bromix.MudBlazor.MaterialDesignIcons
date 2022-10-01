@@ -1,4 +1,4 @@
-![Nuget](https://img.shields.io/nuget/v/Bromix.MudBlazor.MaterialDesignIcons) ![Nuget](https://img.shields.io/nuget/dt/Bromix.MudBlazor.MaterialDesignIcons) ![GitHub](https://img.shields.io/github/license/bromix/Bromix.MudBlazor.MaterialDesignIcons)
+[![Nuget](https://img.shields.io/nuget/v/Bromix.MudBlazor.MaterialDesignIcons)](https://www.nuget.org/packages/Bromix.MudBlazor.MaterialDesignIcons/) [![Nuget](https://img.shields.io/nuget/dt/Bromix.MudBlazor.MaterialDesignIcons)](https://www.nuget.org/packages/Bromix.MudBlazor.MaterialDesignIcons/) [![GitHub](https://img.shields.io/github/license/bromix/Bromix.MudBlazor.MaterialDesignIcons)](https://github.com/bromix/Bromix.MudBlazor.MaterialDesignIcons/blob/main/LICENSE)
 
 > _Note:_ Please use the main [MaterialDesign](https://github.com/Templarian/MaterialDesign/issues) repo to report
 > issues. This repository is only for the creation and deployment of the package.
