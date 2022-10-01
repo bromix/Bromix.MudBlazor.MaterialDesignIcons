@@ -2,10 +2,10 @@ name: .NET
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - release
 
 env:
   VersionAppendix: -alpha-${{ github.run_number }}
@@ -17,16 +17,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Node.js environment
+      - name: Setup node.js environment
         uses: actions/setup-node@v3.4.1
         with:
           node-version: 16.x
       - name: Install @mdi/svg
         run: npm install
-      - name: Get Package Version
+      - name: Get @mdi/svg version
         run: |
-          VERSION=$(node -p "require('./node_modules/@mdi/svg/package.json').version")
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          MDI_VERSION=$(node -p "require('./node_modules/@mdi/svg/package.json').version")
+          echo "MDI_VERSION=$MDI_VERSION" >> $GITHUB_ENV
+      - name: Set pre-release version
+        run: echo "PACKAGE_VERSION=${{ env.MDI_VERSION }}-alpha-${{ github.run_number }}" >> $GITHUB_ENV
+        if: github.base_ref  == 'main'
+      - name: Set release version
+        run: echo "PACKAGE_VERSION=${{ env.MDI_VERSION }}" >> $GITHUB_ENV
+        if: github.base_ref  == 'release'
       - name: Extract svg data
         run: npm run build
       - name: Setup .NET
@@ -36,13 +42,13 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
+        run: dotnet build -c Release -p:Version=${{ env.PACKAGE_VERSION }}
       - name: Pack
-        run: dotnet pack -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
-      - name: Push to nuget
+        run: dotnet pack -c Release -p:Version=${{ env.PACKAGE_VERSION }}
+      - name: Push to nuget 
         run: dotnet nuget push Bromix.MudBlazor.MaterialDesignIcons/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
-      - name: Provide download
-        uses: actions/upload-artifact@v3
-        with:
-          name: nugetpackage
-          path: '**/*.nupkg'
+      # - name: Provide download
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: nugetpackage
+      #     path: '**/*.nupkg'
