@@ -40,7 +40,7 @@ jobs:
       - name: Pack
         run: dotnet pack -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
       - name: Push to nuget
-        run: dotnet nuget push .\Bromix.MudBlazor.MaterialDesignIcons\bin\Release\*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push Bromix.MudBlazor.MaterialDesignIcons/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       - name: Provide download
         uses: actions/upload-artifact@v3
         with:
