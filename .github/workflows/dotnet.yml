@@ -2,10 +2,10 @@ name: .NET
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - release
 
 env:
   VersionAppendix: -alpha-${{ github.run_number }}
@@ -27,6 +27,12 @@ jobs:
         run: |
           VERSION=$(node -p "require('./node_modules/@mdi/svg/package.json').version")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Set pre-release version
+        run: echo "${{ env.VERSION }}-alpha-${{ github.run_number }}=$PACKAGE_VERSION" >> $GITHUB_ENV
+        if: github.head_ref == 'refs/heads/main'
+      - name: Set release version
+        run: echo "${{ env.VERSION }}=$PACKAGE_VERSION" >> $GITHUB_ENV
+        if: github.head_ref == 'refs/heads/release'
       - name: Extract svg data
         run: npm run build
       - name: Setup .NET
@@ -36,11 +42,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
+        run: dotnet build -c Release -p:Version=${{ env.PACKAGE_VERSION }}
       - name: Pack
-        run: dotnet pack -c Release -p:Version=${{ env.VERSION }}${{ env.VersionAppendix }}
-      - name: Push to nuget
-        run: dotnet nuget push Bromix.MudBlazor.MaterialDesignIcons/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+        run: dotnet pack -c Release -p:Version=${{ env.PACKAGE_VERSION }}
+      # - name: Push to nuget
+      #   run: dotnet nuget push Bromix.MudBlazor.MaterialDesignIcons/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
       # - name: Provide download
       #   uses: actions/upload-artifact@v3
       #   with:
