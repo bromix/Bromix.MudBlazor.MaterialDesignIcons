@@ -27,6 +27,8 @@ jobs:
         run: |
           VERSION=$(node -p "require('./node_modules/@mdi/svg/package.json').version")
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
       - name: Set pre-release version
         run: echo "PACKAGE_VERSION=${{ env.VERSION }}-alpha-${{ github.run_number }}" >> $GITHUB_ENV
         if: github.head_ref == 'refs/heads/main'
