@@ -29,10 +29,10 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Set pre-release version
         run: echo "PACKAGE_VERSION=${{ env.VERSION }}-alpha-${{ github.run_number }}" >> $GITHUB_ENV
-        if: github.ref == 'refs/heads/main'
+        if: github.head_ref == 'refs/heads/main'
       - name: Set release version
         run: echo "PACKAGE_VERSION=${{ env.VERSION }}" >> $GITHUB_ENV
-        if: github.ref == 'refs/heads/release'
+        if: github.head_ref == 'refs/heads/release'
       - name: Extract svg data
         run: npm run build
       - name: Setup .NET
