@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const { exec } = require("child_process");
 
 /**
  * Helper function to parse the given json file.
