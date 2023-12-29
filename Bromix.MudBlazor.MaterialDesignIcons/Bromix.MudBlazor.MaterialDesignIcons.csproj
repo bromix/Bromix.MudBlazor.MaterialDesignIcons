@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
-        <LangVersion>12</LangVersion>
+        <LangVersion>11</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup>
