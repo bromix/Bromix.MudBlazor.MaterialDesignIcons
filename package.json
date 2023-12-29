@@ -13,6 +13,6 @@
   "author": "Bromix",
   "license": "MIT",
   "dependencies": {
-    "@mdi/svg": "7.2.96"
+    "@mdi/svg": "7.4.47"
   }
 }
